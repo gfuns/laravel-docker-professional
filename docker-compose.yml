@@ -6,19 +6,25 @@ services:
     volumes:
       - ./laravel-app:/var/www/html
     ports:
-      - 9000:80
+      - 80:80
   
-  mysql_db:
-    image: mysql:latest
+  mysql:
+    image: mysql/mysql-server:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: taravel_docker
+      MYSQL_ROOT_PASSWORD: 'Odinga1#'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'payslack'
+      MYSQL_USER: 'payslack'
+      MYSQL_PASSWORD: 'Odinga1#'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
     ports:
     - 3306:3306
   
   phpmyadmin:
-    image: phpmyadmin:latest
+    image: phpmyadmin/phpmyadmin
     ports:
-      - 9001:80
+      - 8888:80
+    platform: linux/amd64
     environment:
-      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
